@@ -9,7 +9,7 @@ FROM python:3.12-slim-bookworm as base
 #
 FROM base as builder
 RUN apt-get -qq update \
-    && apt-get install -y --no-install-recommends g++ \
+    && apt-get install -y --no-install-recommends g++ git \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src/app/

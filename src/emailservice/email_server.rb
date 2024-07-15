@@ -6,6 +6,7 @@ require "pony"
 require "sinatra"
 
 require "opentelemetry/sdk"
+require "opentelemetry/resource/detector"
 require "opentelemetry/exporter/otlp"
 require "opentelemetry/instrumentation/sinatra"
 
@@ -13,6 +14,7 @@ set :port, ENV["EMAIL_SERVICE_PORT"]
 
 OpenTelemetry::SDK.configure do |c|
   c.use "OpenTelemetry::Instrumentation::Sinatra"
+  c.resource = OpenTelemetry::Resource::Detector::Container.detect
 end
 
 post "/send_order_confirmation" do
